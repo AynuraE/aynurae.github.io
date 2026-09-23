@@ -4,7 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Aynura Erejepbaeva</title>
-<meta name="description" content="Aynura Erejepbaeva — cognitive science and anthropology at Dartmouth. Every stitch opens a part of who I am.">
+<meta name="description" content="Aynura Erejepbaeva — cognitive science and anthropology at Dartmouth. Take this needle: every stitch explains a part of who I am.">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" fill="%23FDF9E9"/><path d="M16 4 L28 16 L16 28 L4 16 Z" fill="none" stroke="%23E22304" stroke-width="3"/><path d="M11 16 L16 11 L21 16 L16 21 Z" fill="none" stroke="%23679C33" stroke-width="2.4"/></svg>'>
+<meta property="og:type" content="website">
+<meta property="og:title" content="Aynura Erejepbaeva">
+<meta property="og:description" content="Take this needle. Every stitch explains a part of who I am.">
+<meta property="og:url" content="https://aynurae.github.io/">
+<meta property="og:image" content="https://aynurae.github.io/aynura.jpg">
+<meta name="twitter:card" content="summary_large_image">
 <style>
   :root{
     --cloth:#FFFDF4;
@@ -67,6 +74,7 @@
     max-width:22ch;
   }
   h1 em{font-style:italic}
+  .hero-eyebrow{font-size:clamp(1.12rem,1.6vw,1.38rem);font-weight:700;letter-spacing:-.02em;margin:0 0 .7rem}
   .lede{font-size:clamp(1rem,1.35vw,1.16rem);margin:0 0 2.4rem;max-width:44ch;color:var(--ink)}
   .take{
     display:inline-flex;align-items:center;gap:.8rem;
@@ -92,7 +100,7 @@
     transition:stroke-dashoffset 1.6s ease-out;
   }
   .drawn > .edge path{stroke-dashoffset:0}
-  .panel > *{position:relative}
+  .panel > *:not(.edge){position:relative}
   h2{font-size:clamp(1.35rem,2.1vw,1.7rem);font-weight:700;letter-spacing:-.02em;margin:0 0 .9rem}
   .panel p{margin:0 0 1rem;max-width:var(--measure)}
   .panel p:last-child{margin-bottom:0}
@@ -122,6 +130,38 @@
     transition:transform .22s ease;
   }
   .tile-wide{aspect-ratio:4/3;margin-bottom:.7rem;width:100%}
+  .tile-doc{
+    display:flex;flex-direction:column;justify-content:flex-end;gap:.15rem;
+    padding:.75rem .8rem;text-align:left;font:inherit;color:var(--ink);
+    border-top:4px solid var(--red);
+  }
+  .tile-doc b{font-size:1.02rem;line-height:1.2}
+  .tile-doc span{font-size:.82rem;color:var(--ink-soft);line-height:1.3}
+  .tile-doc em{font-size:.75rem;color:var(--ink-soft);font-style:normal;margin-top:.25rem}
+  .tile-link{border-top-color:var(--green);border-top-style:dashed;border-top-width:3px}
+  .tiles.videos{grid-template-columns:repeat(auto-fill,minmax(124px,1fr));margin-top:.9rem}
+  .tile-video{aspect-ratio:16/9}
+  .tile-video::after{
+    content:"Watch on YouTube";
+    position:absolute;left:0;right:0;bottom:0;
+    padding:.3rem .45rem;
+    font-size:.68rem;line-height:1.2;color:var(--cloth);
+    background:rgba(20,18,12,.72);
+    opacity:0;transition:opacity .2s ease;
+  }
+  .tile-video:hover::after,.tile-video:focus-visible::after{opacity:1}
+  .tile-video .play{
+    position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+    width:30px;height:30px;border-radius:50%;
+    background:var(--cloth);border:1.5px solid var(--ink);
+  }
+  .tile-video .play::after{
+    content:"";position:absolute;left:11px;top:8.5px;
+    border-left:10px solid var(--ink);
+    border-top:6.5px solid transparent;border-bottom:6.5px solid transparent;
+  }
+  .tile-video:hover .play{background:var(--red);border-color:var(--red)}
+  .tile-video:hover .play::after{border-left-color:var(--cloth)}
   .tile img{width:100%;height:100%;object-fit:cover;display:block}
   .tile:hover,.tile:focus-visible{transform:scale(1.04)}
   .tile:focus-visible{outline:2px solid var(--red);outline-offset:2px}
@@ -138,6 +178,15 @@
   }
   .lightbox.on{opacity:1;visibility:visible}
   .lightbox img{max-width:100%;max-height:78vh;display:block;background:var(--cloth)}
+  .lightbox iframe{
+    width:min(1040px,100%);height:80vh;display:block;border:0;background:var(--cloth);
+  }
+  .lightbox iframe.video{height:auto;aspect-ratio:16/9;max-height:78vh;background:#000}
+  .lightbox img[hidden],.lightbox iframe[hidden],.lightbox a[hidden]{display:none}
+  #lbOpen{
+    color:var(--page);font-size:.92rem;
+    border-bottom:1.5px solid var(--red);text-decoration:none;padding-bottom:2px;
+  }
   .lightbox figcaption{color:var(--page);font-size:.95rem;text-align:center;max-width:56ch}
   .lightbox button{
     position:absolute;background:none;border:0;color:var(--page);
@@ -153,6 +202,41 @@
   .rows li:last-child{border-bottom:0}
   .rows .when{color:var(--ink-soft);font-size:.92rem;margin-left:auto}
   .rows a{text-decoration:none;border-bottom:1.5px solid var(--red);padding-bottom:1px}
+
+  /* ---------- thread baskets ---------- */
+  .travels{line-height:2.3;max-width:none}
+  .spool{position:relative;display:inline-block}
+  .spool-btn{
+    font:inherit;color:inherit;background:none;border:0;margin:0;
+    padding:0 0 3px;cursor:pointer;
+    border-bottom:1.7px dashed var(--red);
+  }
+  .spool-btn:focus-visible{outline:2px solid var(--red);outline-offset:3px}
+  .basket{
+    position:absolute;left:-6px;top:calc(100% + 13px);z-index:25;
+    width:max-content;max-width:min(270px,68vw);
+    padding:.7rem .9rem .75rem;text-align:left;
+    font-size:.9rem;line-height:1.5;
+    background:var(--cloth);border:1.5px solid var(--ink);
+    box-shadow:3px 3px 0 rgba(0,0,0,.09);
+    opacity:0;visibility:hidden;transform:translateY(-6px);
+    transition:opacity .2s ease,transform .2s ease;
+  }
+  .basket::before{
+    content:"";position:absolute;left:18px;top:-13px;height:13px;
+    border-left:1.7px dashed var(--red);
+  }
+  .basket b{
+    display:block;margin-bottom:.35rem;padding-bottom:.3rem;
+    font-weight:400;font-size:.82rem;color:var(--ink-soft);
+    border-bottom:1px solid rgba(0,0,0,.14);
+  }
+  .basket .place{display:block;padding:.13rem 0}
+  .spool:last-of-type .basket{left:auto;right:-6px}
+  .spool:last-of-type .basket::before{left:auto;right:18px}
+  .spool:hover .basket,
+  .spool:focus-within .basket,
+  .spool.open .basket{opacity:1;visibility:visible;transform:none}
 
   /* ---------- song ---------- */
   .player{
@@ -212,6 +296,17 @@
   .links{display:flex;flex-wrap:wrap;gap:1.4rem;margin:1.4rem 0 0;padding:0;list-style:none}
   .links a{text-decoration:none;border-bottom:1.5px solid var(--red);padding-bottom:2px}
 
+  .portrait{
+    float:right;width:clamp(130px,34%,230px);
+    margin:.2rem 0 1rem 1.7rem;padding:.5rem;
+    background:var(--cloth);border:1.4px solid var(--ink);
+  }
+  .portrait img{display:block;width:100%;height:auto}
+  .portrait figcaption{margin-top:.5rem;font-size:.84rem;color:var(--ink-soft)}
+  @media (max-width:620px){
+    .portrait{float:none;width:100%;margin:0 0 1.3rem}
+  }
+
   @media (max-width:900px){
     main{grid-template-columns:1fr;gap:0}
     .hoop{
@@ -227,8 +322,9 @@
   }
   @media (prefers-reduced-motion:reduce){
     html{scroll-behavior:auto}
-    .tile,.lightbox{transition:none}
+    .tile,.lightbox,.tile-video::after{transition:none}
     .player.on .line path{animation:none}
+    .basket{transition:none}
     #needleWrap{animation:none}
     .edge path,.nav path{transition:none}
     .outro{transition:none}
@@ -260,7 +356,8 @@
   <div class="column" id="column">
 
     <section class="hero">
-      <h1>Do you wanna embroider a Karakalpak <em>mu'yiz nag'ıs</em>?</h1>
+      <p class="hero-eyebrow">I am an embroiderer.</p>
+      <h1>Do you wanna embroider a Karakalpak <em>mu'yiz nag'ıs</em>, too?</h1>
       <p class="lede">Take this needle. Every stitch explains a part of who I am.</p>
       <button class="take" id="take">
         <svg class="needle-icon" viewBox="250 0 850 592" aria-hidden="true"><use href="#needleShape"></use></svg>
@@ -271,6 +368,10 @@
     <!-- EDIT: your own words go in these panels. -->
     <section class="panel" id="about">
       <h2>About</h2>
+      <figure class="portrait">
+        <img src="aynura.jpg" alt="Aynura Erejepbaeva">
+        <figcaption>Aynura E</figcaption>
+      </figure>
       <p>Sa’lem!</p>
       <p>My name is Aynura. My name translates to Moonlight (<i>Ay</i> – moon, <i>nura</i> – light) from Karakalpak.</p>
       <p>I’m from Karakalpakstan, an autonomous republic within Uzbekistan, Central Asia. I am currently pursuing a Bachelor’s Degree at Dartmouth College. I’m majoring in Cognitive Science with a focus on Cognitive Science of Design and minoring in Anthropology.</p>
@@ -282,25 +383,35 @@
       <h2>Projects</h2>
       <div class="cards">
         <article class="card">
-          <button class="tile tile-wide" data-full="images/project-1.jpg" data-caption="Project name — what it is and what you did.">
-            <img src="images/project-1.jpg" alt="">
+          <!-- A document window: data-doc holds the link, and it opens full screen. -->
+          <button class="tile tile-wide tile-doc"
+                  data-doc="https://students.dartmouth.edu/wellness-center/sites/students_wellness_center.prod/files/students_wellness_center/wysiwyg/swc_year_in_review_25-26.pdf"
+                  data-caption="Year in Review 2025–26, Dartmouth Student Wellness Center — designed by me">
+            <b>Year in Review</b>
+            <span>Student Wellness Center, 2025–26</span>
+            <em>PDF, 38 pages</em>
           </button>
-          <h3>Project name</h3>
-          <p>One line on what it is and what you did.</p>
+          <h3>Dartmouth Student Wellness Center Year in Review 2025&ndash;2026</h3>
+          <p>Collaborated with the SWC executive director and staff to create a 38-page year-in-review report for 2025&ndash;26 in InDesign and Photoshop, shaping a year of wellness programming into a visually understandable narrative for students and stakeholders.</p>
         </article>
         <article class="card">
-          <button class="tile tile-wide" data-full="images/project-2.jpg" data-caption="Project name — what it is and what you did.">
-            <img src="images/project-2.jpg" alt="">
+          <!-- A link window: data-link opens the site in a new tab. -->
+          <button class="tile tile-wide tile-doc tile-link"
+                  data-link="https://geiselmed.dartmouth.edu/cghe/">
+            <b>CGHE website</b>
+            <span>Center for Global Health Equity, Geisel School of Medicine</span>
           </button>
-          <h3>Project name</h3>
-          <p>One line on what it is and what you did.</p>
+          <h3>Center for Global Health Equity, Geisel School of Medicine</h3>
+          <p>Created and revised 20+ global health program posts for clarity, maintained the CGHE WordPress site as an admin, and marketed CGHE events and programs to students across LinkedIn and Instagram, reaching 500+ followers.</p>
         </article>
         <article class="card">
-          <button class="tile tile-wide" data-full="images/project-3.jpg" data-caption="Project name — what it is and what you did.">
-            <img src="images/project-3.jpg" alt="">
+          <button class="tile tile-wide tile-doc tile-link"
+                  data-link="https://www.figma.com/design/6JDGBr1unauLc70iGVySBg/EE-Just-25W?node-id=6930-2062&amp;p=f">
+            <b>Figma work</b>
+            <span>E.E. Just Program &amp; DALI Lab</span>
           </button>
-          <h3>Project name</h3>
-          <p>One line on what it is and what you did.</p>
+          <h3>E.E. Just Program &amp; Digital Applied Learning and Innovation (DALI) Lab</h3>
+          <p>Conducted 25+ hours of semi-structured interviews with Columbia University PhD researchers and teachers in New Zealand to understand Māori language preservation efforts. Synthesized the findings into design requirements for an interactive language-learning website, then built it in React and HTML, presenting Māori content in five formats: ASR, TTS, parser, forced alignment, and spellcheck.</p>
         </article>
       </div>
     </section>
@@ -338,31 +449,67 @@
 
     <section class="panel" id="hobbies">
       <h2>Hobbies</h2>
-      <p>What you do when nobody is grading it. Tap any window to open it.</p>
-      <!-- 20 windows. Put files in an images/ folder. Delete any tile you don't need;
-           a tile with no matching file simply stays empty and can't be opened. -->
+      <p>I'm a big fig tree. I love reading, embroidery, drawing, guitar, biking, and traveling.</p>
+      <!-- Each window: data-full is the big version, src is the thumbnail.
+           Keep both pointing at a real file in the repo. -->
       <div class="tiles">
-        <button class="tile" data-full="images/hobby-01.jpg" data-caption="Caption 01"><img src="images/hobby-01.jpg" alt=""></button>
-        <button class="tile" data-full="images/hobby-02.jpg" data-caption="Caption 02"><img src="images/hobby-02.jpg" alt=""></button>
-        <button class="tile" data-full="images/hobby-03.jpg" data-caption="Caption 03"><img src="images/hobby-03.jpg" alt=""></button>
-        <button class="tile" data-full="images/hobby-04.jpg" data-caption="Caption 04"><img src="images/hobby-04.jpg" alt=""></button>
-        <button class="tile" data-full="images/hobby-05.jpg" data-caption="Caption 05"><img src="images/hobby-05.jpg" alt=""></button>
-        <button class="tile" data-full="images/hobby-06.jpg" data-caption="Caption 06"><img src="images/hobby-06.jpg" alt=""></button>
-        <button class="tile" data-full="images/hobby-07.jpg" data-caption="Caption 07"><img src="images/hobby-07.jpg" alt=""></button>
-        <button class="tile" data-full="images/hobby-08.jpg" data-caption="Caption 08"><img src="images/hobby-08.jpg" alt=""></button>
-        <button class="tile" data-full="images/hobby-09.jpg" data-caption="Caption 09"><img src="images/hobby-09.jpg" alt=""></button>
-        <button class="tile" data-full="images/hobby-10.jpg" data-caption="Caption 10"><img src="images/hobby-10.jpg" alt=""></button>
-        <button class="tile" data-full="images/hobby-11.jpg" data-caption="Caption 11"><img src="images/hobby-11.jpg" alt=""></button>
-        <button class="tile" data-full="images/hobby-12.jpg" data-caption="Caption 12"><img src="images/hobby-12.jpg" alt=""></button>
-        <button class="tile" data-full="images/hobby-13.jpg" data-caption="Caption 13"><img src="images/hobby-13.jpg" alt=""></button>
-        <button class="tile" data-full="images/hobby-14.jpg" data-caption="Caption 14"><img src="images/hobby-14.jpg" alt=""></button>
-        <button class="tile" data-full="images/hobby-15.jpg" data-caption="Caption 15"><img src="images/hobby-15.jpg" alt=""></button>
-        <button class="tile" data-full="images/hobby-16.jpg" data-caption="Caption 16"><img src="images/hobby-16.jpg" alt=""></button>
-        <button class="tile" data-full="images/hobby-17.jpg" data-caption="Caption 17"><img src="images/hobby-17.jpg" alt=""></button>
-        <button class="tile" data-full="images/hobby-18.jpg" data-caption="Caption 18"><img src="images/hobby-18.jpg" alt=""></button>
-        <button class="tile" data-full="images/hobby-19.jpg" data-caption="Caption 19"><img src="images/hobby-19.jpg" alt=""></button>
-        <button class="tile" data-full="images/hobby-20.jpg" data-caption="Caption 20"><img src="images/hobby-20.jpg" alt=""></button>
+        <button class="tile" data-full="embroidery.jpeg" data-caption="Embroidery"><img src="embroidery.jpeg" alt="Embroidery" loading="lazy" decoding="async"></button>
+        <button class="tile" data-full="embroider2.jpeg" data-caption="Embroidery"><img src="embroider2.jpeg" alt="Embroidery" loading="lazy" decoding="async"></button>
+        <button class="tile" data-full="embroidery3.jpeg" data-caption="Embroidery"><img src="embroidery3.jpeg" alt="Embroidery" loading="lazy" decoding="async"></button>
+        <button class="tile" data-full="embroidery4.jpeg" data-caption="Embroidery"><img src="embroidery4.jpeg" alt="Embroidery" loading="lazy" decoding="async"></button>
+        <button class="tile" data-full="embroidery6.jpeg" data-caption="Embroidery"><img src="embroidery6.jpeg" alt="Embroidery" loading="lazy" decoding="async"></button>
+        <button class="tile" data-full="embroidery7.jpg" data-caption="Embroidery"><img src="embroidery7.jpg" alt="Embroidery" loading="lazy" decoding="async"></button>
+        <button class="tile" data-full="embroidery9.jpg" data-caption="Embroidery"><img src="embroidery9.jpg" alt="Embroidery" loading="lazy" decoding="async"></button>
+        <button class="tile" data-full="embroidery10.jpeg" data-caption="Embroidery"><img src="embroidery10.jpeg" alt="Embroidery" loading="lazy" decoding="async"></button>
+        <button class="tile" data-full="embroidery11.jpeg" data-caption="Embroidery"><img src="embroidery11.jpeg" alt="Embroidery" loading="lazy" decoding="async"></button>
+        <button class="tile" data-full="drawing.jpeg" data-caption="Drawing"><img src="drawing.jpeg" alt="Drawing" loading="lazy" decoding="async"></button>
+        <button class="tile" data-full="drawing2.jpeg" data-caption="Drawing"><img src="drawing2.jpeg" alt="Drawing" loading="lazy" decoding="async"></button>
+        <button class="tile" data-full="drawing3.jpeg" data-caption="Drawing"><img src="drawing3.jpeg" alt="Drawing" loading="lazy" decoding="async"></button>
+        <button class="tile" data-full="drawing4.jpeg" data-caption="Drawing"><img src="drawing4.jpeg" alt="Drawing" loading="lazy" decoding="async"></button>
+        <button class="tile" data-full="animated4.png" data-caption="Illustration"><img src="animated4.png" alt="Illustration" loading="lazy" decoding="async"></button>
+        <button class="tile" data-full="animated.jpg" data-caption="Illustration"><img src="animated.jpg" alt="Illustration" loading="lazy" decoding="async"></button>
+        <button class="tile" data-full="animated1.jpg" data-caption="Illustration"><img src="animated1.jpg" alt="Illustration" loading="lazy" decoding="async"></button>
+        <button class="tile" data-full="animated5.jpg" data-caption="Illustration"><img src="animated5.jpg" alt="Illustration" loading="lazy" decoding="async"></button>
+        <button class="tile" data-full="animated6.jpg" data-caption="Illustration"><img src="animated6.jpg" alt="Illustration" loading="lazy" decoding="async"></button>
       </div>
+      <!-- Video windows. data-video is the YouTube id from the end of a youtu.be link.
+           Put a sentence in data-caption and it shows under the player. -->
+      <div class="tiles videos">
+        <button class="tile tile-video" data-video="VU8NAcfIr9s" data-link="https://youtu.be/VU8NAcfIr9s" data-caption="">
+          <img src="https://i.ytimg.com/vi/VU8NAcfIr9s/hqdefault.jpg" alt="" loading="lazy" decoding="async">
+          <span class="play" aria-hidden="true"></span>
+        </button>
+        <button class="tile tile-video" data-video="7N9oGUBam-M" data-link="https://youtu.be/7N9oGUBam-M" data-caption="">
+          <img src="https://i.ytimg.com/vi/7N9oGUBam-M/hqdefault.jpg" alt="" loading="lazy" decoding="async">
+          <span class="play" aria-hidden="true"></span>
+        </button>
+        <button class="tile tile-video" data-video="EAw5_pSbRUI" data-link="https://youtu.be/EAw5_pSbRUI" data-caption="">
+          <img src="https://i.ytimg.com/vi/EAw5_pSbRUI/hqdefault.jpg" alt="" loading="lazy" decoding="async">
+          <span class="play" aria-hidden="true"></span>
+        </button>
+        <button class="tile tile-video" data-video="UOMYkjUwfqk" data-link="https://youtu.be/UOMYkjUwfqk" data-caption="">
+          <img src="https://i.ytimg.com/vi/UOMYkjUwfqk/hqdefault.jpg" alt="" loading="lazy" decoding="async">
+          <span class="play" aria-hidden="true"></span>
+        </button>
+        <button class="tile tile-video" data-video="2u9T6RpKjHY" data-link="https://youtu.be/2u9T6RpKjHY" data-caption="">
+          <img src="https://i.ytimg.com/vi/2u9T6RpKjHY/hqdefault.jpg" alt="" loading="lazy" decoding="async">
+          <span class="play" aria-hidden="true"></span>
+        </button>
+        <button class="tile tile-video" data-video="rcH92c33hUw" data-link="https://youtu.be/rcH92c33hUw" data-caption="">
+          <img src="https://i.ytimg.com/vi/rcH92c33hUw/hqdefault.jpg" alt="" loading="lazy" decoding="async">
+          <span class="play" aria-hidden="true"></span>
+        </button>
+        <button class="tile tile-video" data-video="Q7aCLeOIyok" data-link="https://youtu.be/Q7aCLeOIyok" data-caption="">
+          <img src="https://i.ytimg.com/vi/Q7aCLeOIyok/hqdefault.jpg" alt="" loading="lazy" decoding="async">
+          <span class="play" aria-hidden="true"></span>
+        </button>
+        <button class="tile tile-video" data-video="XfveEiT4760" data-link="https://youtu.be/XfveEiT4760" data-caption="">
+          <img src="https://i.ytimg.com/vi/XfveEiT4760/hqdefault.jpg" alt="" loading="lazy" decoding="async">
+          <span class="play" aria-hidden="true"></span>
+        </button>
+      </div>
+      <!-- Hover or tap a country to open its basket. Edit the places inside each one. -->
+      <p class="travels"><span class="spool"><button type="button" class="spool-btn" aria-expanded="false">Uzbekistan</button><span class="basket"><b>Uzbekistan</b><span class="place">Karakalpakstan — Shomanay, Qanliko’l, Xojeli, Nukus, Moynaq, Aral Sea, Kegeyli, Kongrad</span><span class="place">Xorazm</span><span class="place">Tashkent Region</span><span class="place">Tashkent City</span><span class="place">Bukhara</span><span class="place">Samarqand</span></span></span>, <span class="spool"><button type="button" class="spool-btn" aria-expanded="false">Taiwan</button><span class="basket"><b>Taiwan</b><span class="place">Taipei</span><span class="place">Taichung</span></span></span>, <span class="spool"><button type="button" class="spool-btn" aria-expanded="false">Russia</button><span class="basket"><b>Russia</b><span class="place">Sochi</span></span></span>, <span class="spool"><button type="button" class="spool-btn" aria-expanded="false">Kazakhstan</button><span class="basket"><b>Kazakhstan</b><span class="place">Astana</span></span></span>, <span class="spool"><button type="button" class="spool-btn" aria-expanded="false">USA</button><span class="basket"><b>USA</b><span class="place">New Hampshire — Hanover, Lebanon</span><span class="place">Massachusetts — Boston</span><span class="place">Vermont</span><span class="place">New Mexico — Albuquerque, Santa Fe</span><span class="place">New York City</span><span class="place">Connecticut — Hartford, New Haven</span><span class="place">Maine — Portland, Polar Spring</span><span class="place">Washington — Seattle</span><span class="place">California — San Francisco, San Diego</span></span></span>, and counting.</p>
     </section>
 
     <section class="panel" id="education">
@@ -389,13 +536,13 @@
 
   <aside class="hoop">
     <div class="player" id="player">
-      <audio id="tune" src="audio/song.mp3" loop preload="none"></audio>
+      <audio id="tune" src="song.mp3" loop preload="none"></audio>
       <button type="button" id="playBtn" aria-pressed="false">
         <span class="glyph">
           <svg class="tri" viewBox="0 0 9 11" aria-hidden="true"><path d="M0 0 L9 5.5 L0 11 Z"></path></svg>
           <span class="bars" aria-hidden="true"><i></i><i></i></span>
         </span>
-        <span id="playLabel">Play the song</span>
+        <span id="playLabel">Enjoy this Karakalpak song!</span>
       </button>
       <svg class="line" viewBox="0 0 200 7" preserveAspectRatio="none" aria-hidden="true">
         <path d="M 1 4 Q 50 1.5 100 4 T 199 3.4"></path>
@@ -419,12 +566,16 @@
   </aside>
 </main>
 
-<figure class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Expanded image">
+<figure class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Expanded view">
   <button id="lbClose" type="button" aria-label="Close">&times;</button>
   <button id="lbPrev" type="button" aria-label="Previous">&#8249;</button>
   <button id="lbNext" type="button" aria-label="Next">&#8250;</button>
   <img id="lbImg" src="" alt="">
+  <iframe id="lbDoc" title="Embedded content" allowfullscreen
+          allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+          referrerpolicy="strict-origin-when-cross-origin" hidden></iframe>
   <figcaption id="lbCap"></figcaption>
+  <a id="lbOpen" href="#" target="_blank" rel="noopener" hidden>Open in a new tab</a>
 </figure>
 
 <script>
@@ -741,11 +892,38 @@
     const playing = !audio.paused;
     wrapper.classList.toggle("on", playing);
     btn.setAttribute("aria-pressed", playing ? "true" : "false");
-    label.textContent = playing ? "Pause the song" : "Play the song";
+    label.textContent = playing ? "Pause the song" : "Enjoy this Karakalpak song!";
   }
   audio.addEventListener("play", sync);
   audio.addEventListener("pause", sync);
   audio.addEventListener("ended", sync);
+})();
+</script>
+
+<script>
+/* ---------- thread baskets: hover on a laptop, tap on a phone ---------- */
+(function(){
+  "use strict";
+  const spools = Array.prototype.slice.call(document.querySelectorAll(".spool"));
+  function closeAll(except){
+    spools.forEach(function(s){
+      if (s === except) return;
+      s.classList.remove("open");
+      s.querySelector(".spool-btn").setAttribute("aria-expanded", "false");
+    });
+  }
+  spools.forEach(function(s){
+    const btn = s.querySelector(".spool-btn");
+    btn.addEventListener("click", function(e){
+      e.stopPropagation();
+      const open = !s.classList.contains("open");
+      closeAll(s);
+      s.classList.toggle("open", open);
+      btn.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+  });
+  document.addEventListener("click", function(){ closeAll(null); });
+  document.addEventListener("keydown", function(e){ if (e.key === "Escape") closeAll(null); });
 })();
 </script>
 
@@ -756,15 +934,25 @@
   const box = document.getElementById("lightbox");
   const img = document.getElementById("lbImg");
   const cap = document.getElementById("lbCap");
+  const doc = document.getElementById("lbDoc");
+  const openLink = document.getElementById("lbOpen");
   const items = [];
   let idx = 0, opener = null;
 
   Array.prototype.slice.call(document.querySelectorAll(".tile")).forEach(function(t){
-    const src = t.dataset.full;
+    /* a link window just goes where it points */
+    if (t.dataset.link){
+      t.type = "button";
+      t.addEventListener("click", function(){
+        window.open(t.dataset.link, "_blank", "noopener");
+      });
+      return;
+    }
+    const src = t.dataset.full || t.dataset.doc || t.dataset.video;
     const thumb = t.querySelector("img");
     /* a window with no picture yet stays an empty frame and can't be opened */
     if (!src){ t.classList.add("empty"); t.disabled = true; return; }
-    if (thumb) thumb.addEventListener("error", function(){
+    if (thumb && !t.dataset.video) thumb.addEventListener("error", function(){
       t.classList.add("empty"); t.disabled = true;
       const at = items.indexOf(t); if (at > -1) items.splice(at, 1);
     });
@@ -776,9 +964,29 @@
   function show(i){
     idx = (i + items.length) % items.length;
     const t = items[idx];
-    img.src = t.dataset.full;
-    img.alt = t.dataset.caption || "";
     cap.textContent = t.dataset.caption || "";
+    if (t.dataset.video){
+      img.hidden = true; img.removeAttribute("src");
+      doc.hidden = false; doc.classList.add("video");
+      doc.src = "https://www.youtube-nocookie.com/embed/" + t.dataset.video +
+                "?rel=0&autoplay=1";
+      openLink.hidden = false;
+      openLink.href = "https://youtu.be/" + t.dataset.video;
+      openLink.textContent = "Watch on YouTube";
+    } else if (t.dataset.doc){
+      /* a document opens in place, with a plain link out in case the
+         host site refuses to be embedded */
+      img.hidden = true; img.removeAttribute("src");
+      doc.hidden = false; doc.classList.remove("video");
+      doc.src = t.dataset.doc;
+      openLink.hidden = false; openLink.href = t.dataset.doc;
+      openLink.textContent = "Open in a new tab";
+    } else {
+      doc.hidden = true; doc.removeAttribute("src");
+      openLink.hidden = true;
+      img.hidden = false; img.src = t.dataset.full;
+      img.alt = t.dataset.caption || "";
+    }
     const many = items.length > 1;
     document.getElementById("lbPrev").hidden = !many;
     document.getElementById("lbNext").hidden = !many;
@@ -793,6 +1001,8 @@
   function close(){
     box.classList.remove("on");
     document.body.style.overflow = "";
+    /* unload it so a video stops playing the moment the window shuts */
+    doc.hidden = true; doc.removeAttribute("src"); doc.classList.remove("video");
     if (opener) opener.focus();
   }
 
