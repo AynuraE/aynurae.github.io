@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aynura Erejepbaeva</title>
+<meta name="description" content="Aynura Erejepbaeva — cognitive science and anthropology at Dartmouth. Every stitch opens a part of who I am.">
+<style>
+  :root{
+    --cloth:#FFFDF4;
+    --page:#FDF9E9;
+    --ink:#000;
+    --ink-soft:#4a4740;
+    --guide:#D9D3BB;
+    --red:#E22304;
+    --green:#679C33;
+    --yellow:#E3C400;
+    --sans:Georgia,"Iowan Old Style","Times New Roman",serif;
+    --measure:62ch;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--page);color:var(--ink);
+    font-family:var(--sans);font-size:17px;line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit}
+
+  /* ---------- masthead ---------- */
+  .masthead{
+    position:sticky;top:0;z-index:40;
+    display:flex;flex-wrap:wrap;gap:.6rem 1.4rem;align-items:baseline;
+    padding:1.1rem clamp(1rem,3vw,2.4rem);
+    background:color-mix(in srgb, var(--page) 88%, transparent);
+    backdrop-filter:blur(6px);
+  }
+  .wordmark{font-weight:400;font-size:1.05rem;letter-spacing:-.01em;text-decoration:none;margin-right:auto}
+  .nav{display:flex;flex-wrap:wrap;gap:.2rem 1.15rem;list-style:none;margin:0;padding:0}
+  .nav a{
+    position:relative;text-decoration:none;font-size:.97rem;padding-bottom:.35rem;
+    display:inline-block;
+  }
+  .nav svg{position:absolute;left:0;bottom:0;width:100%;height:7px;overflow:visible}
+  .nav path{
+    fill:none;stroke:var(--red);stroke-width:2.4;stroke-linecap:round;
+    stroke-dasharray:var(--len);stroke-dashoffset:var(--len);
+    transition:stroke-dashoffset .7s ease-out;
+  }
+  .nav a.sewn path{stroke-dashoffset:0}
+  .nav a:focus-visible{outline:2px solid var(--red);outline-offset:4px}
+
+  /* ---------- layout ---------- */
+  main{
+    display:grid;grid-template-columns:minmax(0,1fr) minmax(0,46%);
+    gap:clamp(1.5rem,4vw,4rem);
+    padding:0 clamp(1rem,3vw,2.4rem) 0;
+    align-items:start;
+  }
+  .column{padding-bottom:12vh}
+
+  /* ---------- hero ---------- */
+  .hero{padding:clamp(3rem,9vh,7rem) 0 clamp(2rem,6vh,4rem)}
+  h1{
+    font-size:clamp(2.3rem,5.1vw,4.15rem);font-weight:700;
+    letter-spacing:-.037em;line-height:1.03;margin:0 0 1rem;
+    max-width:22ch;
+  }
+  h1 em{font-style:italic}
+  .lede{font-size:clamp(1rem,1.35vw,1.16rem);margin:0 0 2.4rem;max-width:44ch;color:var(--ink)}
+  .take{
+    display:inline-flex;align-items:center;gap:.8rem;
+    background:none;border:0;padding:.2rem 0;margin:0;
+    font:inherit;font-size:1.05rem;color:var(--ink);cursor:pointer;
+  }
+  .needle-icon{
+    width:clamp(54px,7vw,82px);height:auto;flex:none;
+    fill:var(--ink);overflow:visible;
+    transition:transform .35s ease;
+  }
+  .take .rule{display:block;width:clamp(70px,14vw,150px);height:1px;background:var(--ink);transition:width .4s ease}
+  .take:hover .rule,.take:focus-visible .rule{width:clamp(110px,20vw,210px)}
+  .take:hover .needle-icon,.take:focus-visible .needle-icon{transform:translate(-5px,5px) rotate(-5deg)}
+  .take:focus-visible{outline:2px solid var(--red);outline-offset:6px}
+
+  /* ---------- panels ---------- */
+  .panel{position:relative;padding:clamp(1.6rem,3vw,2.4rem);margin:0 0 clamp(2.5rem,7vh,5rem)}
+  .edge{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+  .edge path{
+    fill:none;stroke:var(--ink);stroke-width:1.7;stroke-linecap:round;
+    stroke-dasharray:var(--len);stroke-dashoffset:var(--len);
+    transition:stroke-dashoffset 1.6s ease-out;
+  }
+  .drawn > .edge path{stroke-dashoffset:0}
+  .panel > *{position:relative}
+  h2{font-size:clamp(1.35rem,2.1vw,1.7rem);font-weight:700;letter-spacing:-.02em;margin:0 0 .9rem}
+  .panel p{margin:0 0 1rem;max-width:var(--measure)}
+  .panel p:last-child{margin-bottom:0}
+  .note{color:var(--ink-soft);font-size:.94rem}
+
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1.1rem;margin:0}
+  .card{position:relative;padding:1rem;align-self:start}
+  .card .edge path{stroke-width:1.4}
+  .card h3{margin:0 0 .4rem;font-size:1rem;font-weight:700}
+  .card p{font-size:.92rem;color:var(--ink-soft);margin:0}
+
+  .cv-link{max-width:none;text-align:center;margin:1.7rem 0 0}
+  .cv-link a{
+    font-size:1.3rem;text-decoration:none;
+    border-bottom:2px solid var(--red);padding-bottom:3px;
+  }
+
+  /* ---------- expandable windows ---------- */
+  .tiles{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));
+    gap:.55rem;margin:1.2rem 0 0;
+  }
+  .tile{
+    position:relative;display:block;padding:0;margin:0;cursor:pointer;
+    aspect-ratio:1;overflow:hidden;
+    background:var(--cloth);border:1.3px solid rgba(0,0,0,.28);
+    transition:transform .22s ease;
+  }
+  .tile-wide{aspect-ratio:4/3;margin-bottom:.7rem;width:100%}
+  .tile img{width:100%;height:100%;object-fit:cover;display:block}
+  .tile:hover,.tile:focus-visible{transform:scale(1.04)}
+  .tile:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+  .tile.empty{cursor:default;border-style:dashed;border-color:rgba(0,0,0,.18)}
+  .tile.empty img{display:none}
+  .tile.empty:hover{transform:none}
+
+  .lightbox{
+    position:fixed;inset:0;z-index:60;
+    display:flex;align-items:center;justify-content:center;
+    flex-direction:column;gap:1rem;padding:clamp(1rem,4vw,3rem);
+    background:rgba(20,18,12,.92);
+    opacity:0;visibility:hidden;transition:opacity .25s ease;
+  }
+  .lightbox.on{opacity:1;visibility:visible}
+  .lightbox img{max-width:100%;max-height:78vh;display:block;background:var(--cloth)}
+  .lightbox figcaption{color:var(--page);font-size:.95rem;text-align:center;max-width:56ch}
+  .lightbox button{
+    position:absolute;background:none;border:0;color:var(--page);
+    font:inherit;font-size:1.6rem;line-height:1;cursor:pointer;padding:.6rem .9rem;
+  }
+  #lbClose{top:.6rem;right:.8rem;font-size:2rem}
+  #lbPrev{left:.2rem;top:50%;transform:translateY(-50%)}
+  #lbNext{right:.2rem;top:50%;transform:translateY(-50%)}
+  .lightbox button:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+
+  .rows{list-style:none;margin:0;padding:0}
+  .rows li{display:flex;flex-wrap:wrap;gap:.2rem 1rem;padding:.62rem 0;border-bottom:1px solid rgba(0,0,0,.13)}
+  .rows li:last-child{border-bottom:0}
+  .rows .when{color:var(--ink-soft);font-size:.92rem;margin-left:auto}
+  .rows a{text-decoration:none;border-bottom:1.5px solid var(--red);padding-bottom:1px}
+
+  /* ---------- song ---------- */
+  .player{
+    display:flex;align-items:center;gap:.7rem;
+    margin:0 .2rem .8rem;
+  }
+  .player button{
+    display:inline-flex;align-items:center;gap:.55rem;
+    background:none;border:0;padding:.25rem 0;margin:0;
+    font:inherit;font-size:.92rem;color:var(--ink-soft);cursor:pointer;
+  }
+  .player button:focus-visible{outline:2px solid var(--red);outline-offset:4px}
+  .player .glyph{
+    width:26px;height:26px;flex:none;border:1.4px solid var(--ink);border-radius:50%;
+    display:grid;place-items:center;
+  }
+  .player .glyph svg{width:9px;height:11px;fill:var(--ink);display:block}
+  .player .bars{display:none;gap:2px}
+  .player .bars i{display:block;width:2px;height:11px;background:var(--ink)}
+  .player.on .bars{display:flex}
+  .player.on .tri{display:none}
+  .player.on .glyph{border-color:var(--red)}
+  .player.on .bars i{background:var(--red)}
+  .player .line{
+    flex:1;height:7px;overflow:visible;
+  }
+  .player .line path{
+    fill:none;stroke:var(--guide);stroke-width:1.6;stroke-linecap:round;
+    stroke-dasharray:6 5;
+  }
+  .player.on .line path{stroke:var(--red);animation:runthread 1.1s linear infinite}
+  @keyframes runthread{ to{ stroke-dashoffset:-11 } }
+  .player[hidden]{display:none}
+
+  /* ---------- hoop ---------- */
+  .hoop{position:sticky;top:5.2rem;padding-top:clamp(3rem,9vh,7rem)}
+  .hoop > svg{width:100%;height:auto;display:block;overflow:visible}
+  .caption{display:flex;gap:1rem;align-items:baseline;margin:.9rem .2rem 0;font-size:.9rem;color:var(--ink-soft)}
+  .caption b{font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums}
+  #cloth{fill:var(--cloth)}
+  #frame{fill:none;stroke:var(--ink);stroke-width:2.4;stroke-linecap:round}
+  .guide{fill:none;stroke:var(--guide);stroke-width:1.7;stroke-linecap:round}
+  .stitch{fill:none;stroke-linecap:round}
+  .maskline{fill:none;stroke:#fff;stroke-linecap:butt}
+  #needle{fill:var(--ink)}
+  #thread{fill:none;stroke:var(--red);stroke-width:3.4;stroke-linecap:round}
+  #needleWrap{animation:bob 3.4s ease-in-out infinite}
+  @keyframes bob{
+    0%,100%{transform:translate(0,0)}
+    50%{transform:translate(-2px,2px)}
+  }
+
+  /* ---------- footer ---------- */
+  .outro{opacity:0;transform:translateY(8px);transition:opacity .9s ease,transform .9s ease}
+  .outro.done{opacity:1;transform:none}
+  .outro p{max-width:var(--measure)}
+  .links{display:flex;flex-wrap:wrap;gap:1.4rem;margin:1.4rem 0 0;padding:0;list-style:none}
+  .links a{text-decoration:none;border-bottom:1.5px solid var(--red);padding-bottom:2px}
+
+  @media (max-width:900px){
+    main{grid-template-columns:1fr;gap:0}
+    .hoop{
+      order:-1;position:sticky;top:3.6rem;z-index:30;padding-top:.6rem;
+      background:linear-gradient(var(--page) 78%,transparent);
+      padding-bottom:.8rem;
+    }
+    .hoop > svg{max-height:34vh;width:auto;margin:0 auto}
+    .caption{justify-content:center;margin-top:.4rem}
+    .player{margin-bottom:.5rem}
+    .hero{padding-top:2rem}
+    body{font-size:16px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .tile,.lightbox{transition:none}
+    .player.on .line path{animation:none}
+    #needleWrap{animation:none}
+    .edge path,.nav path{transition:none}
+    .outro{transition:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- Aynura's needle, drawn once here and reused wherever it appears -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <path id="needleShape" d="M 1048.265625 44.59375 L 1048.164062 44.371094 C 1047.859375 43.792969 1047.359375 43.324219 1046.667969 42.972656 L 1045.132812 42.679688 C 1044.015625 42.574219 1042.699219 42.640625 1041.195312 42.878906 C 1038.179688 43.359375 1034.390625 44.535156 1029.828125 46.402344 C 1018.3125 51.207031 1005.335938 58.472656 990.90625 68.207031 L 982.363281 74.195312 C 974.96875 79.742188 970.734375 83.003906 969.664062 83.984375 C 964.523438 88.171875 960.0625 92.144531 956.273438 95.902344 C 952.5625 99.5 949.375 103.203125 946.707031 107.003906 C 944.476562 110.253906 943.753906 112.816406 944.542969 114.691406 C 944.542969 114.695312 944.546875 114.703125 944.550781 114.710938 C 944.851562 115.289062 945.351562 115.753906 946.046875 116.105469 C 946.972656 116.386719 948.089844 116.496094 949.402344 116.429688 L 951.515625 116.199219 C 954.53125 115.722656 958.320312 114.546875 962.882812 112.675781 C 965.167969 111.742188 967.640625 110.632812 970.3125 109.351562 L 974.390625 107.320312 C 977.136719 105.914062 979.949219 104.386719 982.820312 102.746094 C 988.566406 99.46875 994.558594 95.730469 1000.800781 91.527344 C 1007.441406 87.085938 1013.53125 82.667969 1019.070312 78.277344 C 1023.554688 74.9375 1029.34375 69.902344 1036.4375 63.179688 C 1045.25 54.570312 1049.191406 48.375 1048.265625 44.59375 Z M 1089.820312 25.648438 C 1092.75 32.632812 1090.324219 41.128906 1082.542969 51.132812 C 1066.992188 69.015625 1047.925781 85.804688 1025.332031 101.492188 C 1000.128906 117.761719 949.558594 145.410156 873.628906 184.429688 L 256.46875 585.140625 L 871.058594 137.085938 L 955.488281 65.046875 L 980.984375 46.554688 C 1009.792969 27.753906 1033.035156 16.15625 1050.703125 11.753906 C 1067.710938 6.132812 1080.46875 10.148438 1088.976562 23.804688 L 1089.109375 24.179688 C 1089.375 24.660156 1089.613281 25.152344 1089.820312 25.648438 Z M 1089.820312 25.648438"></path>
+</defs></svg>
+
+<header class="masthead">
+  <a class="wordmark" href="#top">Aynura Erejepbaeva</a>
+  <nav>
+    <ul class="nav" id="nav">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#cv">CV</a></li>
+      <li><a href="#writing">Writing</a></li>
+      <li><a href="#hobbies">Hobbies</a></li>
+      <li><a href="#education">Education</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="top">
+  <div class="column" id="column">
+
+    <section class="hero">
+      <h1>Do you wanna embroider a Karakalpak <em>mu'yiz nag'ıs</em>?</h1>
+      <p class="lede">Take this needle. Every stitch explains a part of who I am.</p>
+      <button class="take" id="take">
+        <svg class="needle-icon" viewBox="250 0 850 592" aria-hidden="true"><use href="#needleShape"></use></svg>
+        Take this needle<span class="rule"></span>
+      </button>
+    </section>
+
+    <!-- EDIT: your own words go in these panels. -->
+    <section class="panel" id="about">
+      <h2>About</h2>
+      <p>Sa’lem!</p>
+      <p>My name is Aynura. My name translates to Moonlight (<i>Ay</i> – moon, <i>nura</i> – light) from Karakalpak.</p>
+      <p>I’m from Karakalpakstan, an autonomous republic within Uzbekistan, Central Asia. I am currently pursuing a Bachelor’s Degree at Dartmouth College. I’m majoring in Cognitive Science with a focus on Cognitive Science of Design and minoring in Anthropology.</p>
+      <p>I believe each person is an open book and we should take time to read them carefully. This website offers a personal glimpse into who I am—beyond what bullet points on a resume can offer.</p>
+      <p>Raxmet!</p>
+    </section>
+
+    <section class="panel" id="projects">
+      <h2>Projects</h2>
+      <div class="cards">
+        <article class="card">
+          <button class="tile tile-wide" data-full="images/project-1.jpg" data-caption="Project name — what it is and what you did.">
+            <img src="images/project-1.jpg" alt="">
+          </button>
+          <h3>Project name</h3>
+          <p>One line on what it is and what you did.</p>
+        </article>
+        <article class="card">
+          <button class="tile tile-wide" data-full="images/project-2.jpg" data-caption="Project name — what it is and what you did.">
+            <img src="images/project-2.jpg" alt="">
+          </button>
+          <h3>Project name</h3>
+          <p>One line on what it is and what you did.</p>
+        </article>
+        <article class="card">
+          <button class="tile tile-wide" data-full="images/project-3.jpg" data-caption="Project name — what it is and what you did.">
+            <img src="images/project-3.jpg" alt="">
+          </button>
+          <h3>Project name</h3>
+          <p>One line on what it is and what you did.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel" id="cv">
+      <h2>CV</h2>
+      <ul class="rows">
+        <li>Student Fellow, Office of Community Standards &amp; Accountability <span class="when">Jun 2026 &ndash; Present</span></li>
+        <li>Writer for Mirror, The Dartmouth <span class="when">Sep 2025 &ndash; Present</span></li>
+        <li>Endowment Fellows Program, Dartmouth Investment Office <span class="when">Jul 2026 &ndash; Aug 2026</span></li>
+        <li>Law and Ethics Fellowship, The Ethics Institute at Dartmouth <span class="when">Nov 2025 &ndash; Jun 2026</span></li>
+        <li>Sociolinguistics Research Assistant, Department of Linguistics <span class="when">Jan 2026 &ndash; Mar 2026</span></li>
+        <li>Researcher &amp; Filmmaker, Daughters of Aral (independent study) <span class="when">May 2025 &ndash; Aug 2025</span></li>
+        <li>Mentorship Coordinator, Dartmouth Women in Innovation <span class="when">Apr 2025 &ndash; Sep 2025</span></li>
+        <li>User Experience Intern, E.E. Just Program &amp; DALI Lab <span class="when">Jan 2025 &ndash; Jun 2025</span></li>
+      </ul>
+      <p class="cv-link"><a href="https://docs.google.com/document/d/17bfJRnKfDd655Ce4-wEUlmOXtelGatTz/edit?usp=sharing&amp;ouid=116818492227061523449&amp;rtpof=true&amp;sd=true">Full CV</a></p>
+    </section>
+
+    <section class="panel" id="writing">
+      <h2>Writing</h2>
+      <ul class="rows">
+        <li><a href="https://www.thedartmouth.com/article/2026/09/erejepbaeva-dartmouth-students-look-closer">Dartmouth Students: Look Closer</a><span class="when">The Dartmouth</span></li>
+        <li><a href="https://www.thedartmouth.com/article/2026/04/erejepbaeva-a-symphony-of-dartmouth">A Symphony of Dartmouth</a><span class="when">The Dartmouth</span></li>
+        <li><a href="https://www.thedartmouth.com/article/2026/04/an-ode-to-the-passage-of-time-at-dartmz">An Ode to the Passage of Time at ‘Dartmız’</a><span class="when">The Dartmouth</span></li>
+        <li><a href="https://www.thedartmouth.com/article/2026/04/mirror-asks-springing-forward">Mirror Asks: Springing Forward</a><span class="when">The Dartmouth</span></li>
+        <li><a href="https://www.thedartmouth.com/article/2026/01/reflection-marx-on-collis-pastries">Marx on Collis Pastries</a><span class="when">The Dartmouth</span></li>
+        <li><a href="https://www.thedartmouth.com/article/2026/01/erejepbaeva-reflection-silence-in-winterim">Silence in Winterim</a><span class="when">The Dartmouth</span></li>
+        <li><a href="https://www.thedartmouth.com/article/2025/11/mirror-asks-new-writers-edition">Mirror Asks: New Writers Edition</a><span class="when">The Dartmouth</span></li>
+        <li><a href="https://www.thedartmouth.com/article/2025/10/erejepbaeva-the-dartmouth-dining-plan-debacle">The Dartmouth Dining Plan Debacle</a><span class="when">The Dartmouth</span></li>
+        <li><a href="https://www.thedartmouth.com/article/2025/10/reverse-culture-shock-finding-home-again">Reverse Culture Shock: Finding Home Again</a><span class="when">The Dartmouth</span></li>
+        <li><a href="https://www.thedartmouth.com/article/2025/09/mirror-asks-fall-edition">Mirror Asks: Fall Edition</a><span class="when">The Dartmouth</span></li>
+      </ul>
+    </section>
+
+    <section class="panel" id="hobbies">
+      <h2>Hobbies</h2>
+      <p>What you do when nobody is grading it. Tap any window to open it.</p>
+      <!-- 20 windows. Put files in an images/ folder. Delete any tile you don't need;
+           a tile with no matching file simply stays empty and can't be opened. -->
+      <div class="tiles">
+        <button class="tile" data-full="images/hobby-01.jpg" data-caption="Caption 01"><img src="images/hobby-01.jpg" alt=""></button>
+        <button class="tile" data-full="images/hobby-02.jpg" data-caption="Caption 02"><img src="images/hobby-02.jpg" alt=""></button>
+        <button class="tile" data-full="images/hobby-03.jpg" data-caption="Caption 03"><img src="images/hobby-03.jpg" alt=""></button>
+        <button class="tile" data-full="images/hobby-04.jpg" data-caption="Caption 04"><img src="images/hobby-04.jpg" alt=""></button>
+        <button class="tile" data-full="images/hobby-05.jpg" data-caption="Caption 05"><img src="images/hobby-05.jpg" alt=""></button>
+        <button class="tile" data-full="images/hobby-06.jpg" data-caption="Caption 06"><img src="images/hobby-06.jpg" alt=""></button>
+        <button class="tile" data-full="images/hobby-07.jpg" data-caption="Caption 07"><img src="images/hobby-07.jpg" alt=""></button>
+        <button class="tile" data-full="images/hobby-08.jpg" data-caption="Caption 08"><img src="images/hobby-08.jpg" alt=""></button>
+        <button class="tile" data-full="images/hobby-09.jpg" data-caption="Caption 09"><img src="images/hobby-09.jpg" alt=""></button>
+        <button class="tile" data-full="images/hobby-10.jpg" data-caption="Caption 10"><img src="images/hobby-10.jpg" alt=""></button>
+        <button class="tile" data-full="images/hobby-11.jpg" data-caption="Caption 11"><img src="images/hobby-11.jpg" alt=""></button>
+        <button class="tile" data-full="images/hobby-12.jpg" data-caption="Caption 12"><img src="images/hobby-12.jpg" alt=""></button>
+        <button class="tile" data-full="images/hobby-13.jpg" data-caption="Caption 13"><img src="images/hobby-13.jpg" alt=""></button>
+        <button class="tile" data-full="images/hobby-14.jpg" data-caption="Caption 14"><img src="images/hobby-14.jpg" alt=""></button>
+        <button class="tile" data-full="images/hobby-15.jpg" data-caption="Caption 15"><img src="images/hobby-15.jpg" alt=""></button>
+        <button class="tile" data-full="images/hobby-16.jpg" data-caption="Caption 16"><img src="images/hobby-16.jpg" alt=""></button>
+        <button class="tile" data-full="images/hobby-17.jpg" data-caption="Caption 17"><img src="images/hobby-17.jpg" alt=""></button>
+        <button class="tile" data-full="images/hobby-18.jpg" data-caption="Caption 18"><img src="images/hobby-18.jpg" alt=""></button>
+        <button class="tile" data-full="images/hobby-19.jpg" data-caption="Caption 19"><img src="images/hobby-19.jpg" alt=""></button>
+        <button class="tile" data-full="images/hobby-20.jpg" data-caption="Caption 20"><img src="images/hobby-20.jpg" alt=""></button>
+      </div>
+    </section>
+
+    <section class="panel" id="education">
+      <h2>Education</h2>
+      <ul class="rows">
+        <li>University of Auckland <span class="when">Jan &ndash; Mar 2027*</span></li>
+        <li>Freie Universität Berlin <span class="when">Dec 2026*</span></li>
+        <li>Tuck School of Business at Dartmouth <span class="when">Jun 2026</span></li>
+        <li>Dartmouth College <span class="when">Sep 2024 &ndash; Present</span></li>
+      </ul>
+      <p class="note" style="margin-top:1rem">* upcoming</p>
+    </section>
+
+    <section class="outro" id="outro">
+      <p>The pattern is finished. Thank you for sitting with it.</p>
+      <ul class="links">
+        <li><a href="https://www.linkedin.com/in/aynura-erejepbaeva02/">LinkedIn</a></li>
+        <li><a href="https://github.com/AynuraE">GitHub</a></li>
+        <li><a href="https://substack.com/@moonlightae">Substack</a></li>
+        <li><a href="mailto:aynuraerejepbaeva2006@gmail.com">Email</a></li>
+      </ul>
+    </section>
+  </div>
+
+  <aside class="hoop">
+    <div class="player" id="player">
+      <audio id="tune" src="audio/song.mp3" loop preload="none"></audio>
+      <button type="button" id="playBtn" aria-pressed="false">
+        <span class="glyph">
+          <svg class="tri" viewBox="0 0 9 11" aria-hidden="true"><path d="M0 0 L9 5.5 L0 11 Z"></path></svg>
+          <span class="bars" aria-hidden="true"><i></i><i></i></span>
+        </span>
+        <span id="playLabel">Play the song</span>
+      </button>
+      <svg class="line" viewBox="0 0 200 7" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M 1 4 Q 50 1.5 100 4 T 199 3.4"></path>
+      </svg>
+    </div>
+    <svg id="canvas" viewBox="0 0 1100 900" role="img"
+         aria-label="A Karakalpak mu'yiz nag'ıs pattern being embroidered stitch by stitch as the page scrolls.">
+      <defs>
+        <mask id="reveal" maskUnits="userSpaceOnUse" x="0" y="0" width="1100" height="900">
+          <g id="maskGroup"></g>
+        </mask>
+      </defs>
+      <rect id="cloth" x="40" y="40" width="1020" height="820" rx="2"></rect>
+      <path id="frame"></path>
+      <g id="guideGroup"></g>
+      <g id="stitchGroup" mask="url(#reveal)"></g>
+      <path id="thread"></path>
+      <g id="needleWrap"><use id="needle" href="#needleShape"></use></g>
+    </svg>
+    <p class="caption"><span><b id="count">0</b> of <b id="total">0</b> stitches</span><span>Mu'yiz Nag'ıs</span></p>
+  </aside>
+</main>
+
+<figure class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Expanded image">
+  <button id="lbClose" type="button" aria-label="Close">&times;</button>
+  <button id="lbPrev" type="button" aria-label="Previous">&#8249;</button>
+  <button id="lbNext" type="button" aria-label="Next">&#8250;</button>
+  <img id="lbImg" src="" alt="">
+  <figcaption id="lbCap"></figcaption>
+</figure>
+
+<script>
+(function(){
+  "use strict";
+  const NS = "http://www.w3.org/2000/svg";
+  const RED = "#E22304", GREEN = "#679C33", YELLOW = "#E3C400";
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- seeded wobble so the lines stay hand-drawn but stable ---------- */
+  function rng(seed){
+    return function(){
+      seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+      let t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+  }
+  const rand = rng(20280412);
+  const wob = a => (rand() - 0.5) * a;
+
+  /* ---------- the lattice ---------- */
+  const CX = 550, CY = 450, K = 0.78, S_R = 94, S_G = 45;
+  const P = (u, v, S) => [CX + (u - v) * S, CY + (u + v) * S * K];
+
+  const SPIRAL = (function(e, g){
+    const pts = [[-e, -e]], dirs = [[1,0],[0,1],[-1,0],[0,-1]];
+    let x = -e, y = -e, L = 2 * e, i = 0;
+    while (L > g * 0.7 && i < 8){
+      const d = dirs[i % 4];
+      x += d[0] * L; y += d[1] * L;
+      pts.push([x, y]);
+      if (i % 2 === 1) L -= g;
+      i++;
+    }
+    return pts;
+  })(0.40, 0.26);
+
+  function rot(s, t, r){
+    for (let i = 0; i < ((r % 4) + 4) % 4; i++){ const n = -t; t = s; s = n; }
+    return [s, t];
+  }
+  function quadrant(u, v){
+    const p = u - v, q = u + v;
+    if (Math.abs(p) >= Math.abs(q)) return p > 0 ? 0 : 2;
+    return q > 0 ? 1 : 3;
+  }
+
+  /* a polyline drawn with a slight tremble, the way a hand would lay it down */
+  function toPath(pts, amp){
+    let d = "M " + (pts[0][0] + wob(amp)).toFixed(1) + " " + (pts[0][1] + wob(amp)).toFixed(1);
+    for (let i = 1; i < pts.length; i++){
+      const a = pts[i - 1], b = pts[i];
+      const mx = (a[0] + b[0]) / 2 + wob(amp * 1.7);
+      const my = (a[1] + b[1]) / 2 + wob(amp * 1.7);
+      d += " Q " + mx.toFixed(1) + " " + my.toFixed(1) + " "
+         + (b[0] + wob(amp)).toFixed(1) + " " + (b[1] + wob(amp)).toFixed(1);
+    }
+    return d;
+  }
+
+  function hookPts(u, v, S, scale, r){
+    return SPIRAL.map(function(p){
+      const q = rot(p[0], p[1], r);
+      return P(u + q[0] * scale, v + q[1] * scale, S);
+    });
+  }
+
+  function byAngle(cells){
+    return cells.slice().sort(function(a, b){
+      const pa = P(a[0], a[1], 1), pb = P(b[0], b[1], 1);
+      const aa = Math.atan2(pa[1] - CY, pa[0] - CX) + Math.PI / 2;
+      const ab = Math.atan2(pb[1] - CY, pb[0] - CX) + Math.PI / 2;
+      return ((aa + 7) % (Math.PI * 2)) - ((ab + 7) % (Math.PI * 2));
+    });
+  }
+
+  /* every shared lattice edge belongs to whichever cell reaches it first,
+     so no line is ever stitched twice */
+  function ringPaths(cells, S, color, width, amp, hookScale){
+    const claimed = {}, out = [];
+    byAngle(cells).forEach(function(c){
+      const u = c[0], v = c[1];
+      const corners = [[u-0.5,v-0.5],[u+0.5,v-0.5],[u+0.5,v+0.5],[u-0.5,v+0.5]];
+      for (let i = 0; i < 4; i++){
+        const a = corners[i], b = corners[(i + 1) % 4];
+        const key = [a, b].map(p => p[0].toFixed(2) + "," + p[1].toFixed(2)).sort().join("|");
+        if (claimed[key]) continue;
+        claimed[key] = 1;
+        out.push({ d: toPath([P(a[0],a[1],S), P(b[0],b[1],S)], amp), color: color, w: width });
+      }
+      out.push({ d: toPath(hookPts(u, v, S, hookScale, quadrant(u, v)), amp), color: color, w: width });
+    });
+    return out;
+  }
+
+  const redCells = [], greenCells = [];
+  for (let u = -2; u <= 2; u++) for (let v = -2; v <= 2; v++)
+    if (Math.max(Math.abs(u), Math.abs(v)) === 2) redCells.push([u, v]);
+  [-1.5,-0.5,0.5,1.5].forEach(function(u){
+    [-1.5,-0.5,0.5,1.5].forEach(function(v){
+      if (Math.max(Math.abs(u), Math.abs(v)) === 1.5) greenCells.push([u, v]);
+    });
+  });
+
+  /* stitch order: the red frame first, then the yellow accents, then the green heart */
+  let PATHS = ringPaths(redCells, S_R, RED, 7, 3.2, 0.85);
+  [[-1.02,-1.02],[1.02,-1.02],[1.02,1.02],[-1.02,1.02]].forEach(function(c){
+    PATHS.push({
+      d: toPath(hookPts(c[0], c[1], S_R, 0.62, quadrant(c[0], c[1])), 2.6),
+      color: YELLOW, w: 7.5
+    });
+  });
+  PATHS = PATHS.concat(ringPaths(greenCells, S_G, GREEN, 4.6, 1.7, 0.85));
+
+  /* ---------- the hoop frame, drawn by hand too ---------- */
+  document.getElementById("frame").setAttribute("d",
+    toPath([[46,46],[1054,46],[1054,854],[46,854],[46,46]], 4.5));
+
+  /* ---------- lay the pattern into the page ---------- */
+  const guideGroup  = document.getElementById("guideGroup");
+  const stitchGroup = document.getElementById("stitchGroup");
+  const maskGroup   = document.getElementById("maskGroup");
+  const lens = [], cum = [0];
+  const masks = [];
+
+  PATHS.forEach(function(p){
+    const guide = document.createElementNS(NS, "path");
+    guide.setAttribute("d", p.d);
+    guide.setAttribute("class", "guide");
+    guideGroup.appendChild(guide);
+
+    const stitch = document.createElementNS(NS, "path");
+    stitch.setAttribute("d", p.d);
+    stitch.setAttribute("class", "stitch");
+    stitch.setAttribute("stroke", p.color);
+    stitch.setAttribute("stroke-width", p.w);
+    /* the gaps are what make it read as separate stitches rather than a drawn line */
+    stitch.setAttribute("stroke-dasharray", (p.w * 1.9).toFixed(1) + " " + (p.w * 1.25).toFixed(1));
+    stitchGroup.appendChild(stitch);
+
+    const m = document.createElementNS(NS, "path");
+    m.setAttribute("d", p.d);
+    m.setAttribute("class", "maskline");
+    m.setAttribute("stroke-width", p.w + 6);
+    maskGroup.appendChild(m);
+    masks.push(m);
+  });
+
+  masks.forEach(function(m){
+    const L = m.getTotalLength();
+    lens.push(L);
+    m.style.strokeDasharray = L + " " + L;
+    m.style.strokeDashoffset = L;
+    cum.push(cum[cum.length - 1] + L);
+  });
+  const TOTAL = cum[cum.length - 1];
+  const stitchCount = PATHS.length;
+  document.getElementById("total").textContent = stitchCount;
+
+  /* ---------- needle ---------- */
+  const needle = document.getElementById("needle");
+  const wrap = document.getElementById("needleWrap");
+  const thread = document.getElementById("thread");
+  const bb = needle.getBBox();
+  const TIP = [bb.x, bb.y + bb.height];          /* her needle points down-left */
+  const EYE = [bb.x + bb.width, bb.y];
+  const NSCALE = 235 / bb.width;
+  const LOCAL = Math.atan2(EYE[1] - TIP[1], EYE[0] - TIP[0]) * 180 / Math.PI;
+
+  function placeNeedle(x, y, angle){
+    needle.setAttribute("transform",
+      "translate(" + x.toFixed(1) + " " + y.toFixed(1) + ") rotate(" + angle.toFixed(1) + ") " +
+      "scale(" + NSCALE.toFixed(4) + ") translate(" + (-TIP[0]).toFixed(1) + " " + (-TIP[1]).toFixed(1) + ")");
+    const a = angle * Math.PI / 180;
+    const ex = (EYE[0] - TIP[0]) * NSCALE, ey = (EYE[1] - TIP[1]) * NSCALE;
+    const eye = [x + ex * Math.cos(a) - ey * Math.sin(a), y + ex * Math.sin(a) + ey * Math.cos(a)];
+    /* thread runs from the spool at the low corner up to the eye */
+    thread.setAttribute("d",
+      "M 90 880 Q " + ((90 + eye[0]) / 2 - 130).toFixed(1) + " " + ((880 + eye[1]) / 2 + 40).toFixed(1) +
+      " " + eye[0].toFixed(1) + " " + eye[1].toFixed(1));
+  }
+
+  /* ---------- scroll drives the needle ---------- */
+  const panels = Array.prototype.slice.call(document.querySelectorAll(".panel"));
+  const navLinks = Array.prototype.slice.call(document.querySelectorAll(".nav a"));
+  const countEl = document.getElementById("count");
+  const outro = document.getElementById("outro");
+  let lastCount = -1, ticking = false;
+
+  function progress(){
+    const vh = window.innerHeight;
+    const start = vh * 0.28;
+    const end = Math.max(start + 1, document.documentElement.scrollHeight - vh * 1.12);
+    return Math.max(0, Math.min(1, (window.scrollY - start) / (end - start)));
+  }
+
+  function render(){
+    const sewn = reduce ? TOTAL : TOTAL * progress();
+    let active = -1;
+    for (let i = 0; i < masks.length; i++){
+      const a = cum[i], b = cum[i + 1];
+      if (sewn >= b){ masks[i].style.strokeDashoffset = 0; }
+      else if (sewn <= a){ masks[i].style.strokeDashoffset = lens[i]; }
+      else {
+        masks[i].style.strokeDashoffset = lens[i] - (sewn - a);
+        active = i;
+      }
+    }
+    const done = Math.min(stitchCount, Math.floor(sewn / TOTAL * stitchCount + 0.0001));
+    if (done !== lastCount){ countEl.textContent = done; lastCount = done; }
+    outro.classList.toggle("done", sewn >= TOTAL - 0.5);
+
+    /* park the needle at the working end of the thread */
+    const i = active > -1 ? active : Math.max(0, masks.length - 1);
+    const at = active > -1 ? sewn - cum[i] : lens[i];
+    const p1 = masks[i].getPointAtLength(Math.min(lens[i], at));
+    if (sewn >= TOTAL - 0.5){
+      placeNeedle(212, 808, 14 - LOCAL);
+    } else {
+      const inward = Math.atan2(CY - p1.y, CX - p1.x) * 180 / Math.PI;
+      placeNeedle(p1.x, p1.y, inward - 22 - LOCAL);
+    }
+    ticking = false;
+  }
+
+  function onScroll(){
+    if (!ticking){ ticking = true; requestAnimationFrame(render); }
+  }
+
+  /* panel outlines: hand-drawn, and they draw themselves once when you arrive */
+  function drawEdges(){
+    Array.prototype.slice.call(document.querySelectorAll(".panel, .card")).forEach(function(el){
+      const w = el.offsetWidth, h = el.offsetHeight;
+      if (!w || !h) return;
+      let svg = el.querySelector(":scope > .edge");
+      if (!svg){
+        svg = document.createElementNS(NS, "svg");
+        svg.setAttribute("class", "edge");
+        svg.appendChild(document.createElementNS(NS, "path"));
+        el.insertBefore(svg, el.firstChild);
+      }
+      svg.setAttribute("viewBox", "0 0 " + w + " " + h);
+      const pad = 3;
+      const path = svg.querySelector("path");
+      path.setAttribute("d", toPath([
+        [pad, pad], [w - pad, pad - 1], [w - pad + 1, h - pad], [pad + 1, h - pad], [pad, pad + 2]
+      ], 3.4));
+      const L = path.getTotalLength();
+      path.style.setProperty("--len", L);
+    });
+  }
+
+  const seen = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (!e.isIntersecting) return;
+      e.target.classList.add("drawn");
+      const link = document.querySelector('.nav a[href="#' + e.target.id + '"]');
+      if (link) link.classList.add("sewn");
+    });
+  }, { threshold: 0.18 });
+
+  /* the stitched underline under each nav item */
+  navLinks.forEach(function(a){
+    const svg = document.createElementNS(NS, "svg");
+    svg.setAttribute("viewBox", "0 0 100 7");
+    svg.setAttribute("preserveAspectRatio", "none");
+    const p = document.createElementNS(NS, "path");
+    p.setAttribute("d", "M 2 4 Q 26 1.6 50 4 T 98 3.4");
+    svg.appendChild(p);
+    a.appendChild(svg);
+    p.style.setProperty("--len", 130);
+  });
+
+  document.getElementById("take").addEventListener("click", function(){
+    document.getElementById("about").scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+  });
+
+  drawEdges();
+  panels.forEach(function(p){ seen.observe(p); });
+  document.querySelectorAll(".card").forEach(function(c){ seen.observe(c); });
+  render();
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", function(){ drawEdges(); render(); });
+  if (reduce){
+    wrap.style.display = "none";
+    thread.style.display = "none";
+    outro.classList.add("done");
+    countEl.textContent = stitchCount;
+  }
+})();
+</script>
+<script>
+/* ---------- the song: only ever plays when asked ---------- */
+(function(){
+  "use strict";
+  const wrapper = document.getElementById("player");
+  const audio = document.getElementById("tune");
+  const btn = document.getElementById("playBtn");
+  const label = document.getElementById("playLabel");
+
+  /* if there is no audio file in the repo yet, the control simply isn't shown */
+  audio.addEventListener("error", function(){ wrapper.hidden = true; });
+
+  btn.addEventListener("click", function(){
+    if (audio.paused){
+      audio.play().catch(function(){ wrapper.hidden = true; });
+    } else {
+      audio.pause();
+    }
+  });
+
+  function sync(){
+    const playing = !audio.paused;
+    wrapper.classList.toggle("on", playing);
+    btn.setAttribute("aria-pressed", playing ? "true" : "false");
+    label.textContent = playing ? "Pause the song" : "Play the song";
+  }
+  audio.addEventListener("play", sync);
+  audio.addEventListener("pause", sync);
+  audio.addEventListener("ended", sync);
+})();
+</script>
+
+<script>
+/* ---------- the expandable windows ---------- */
+(function(){
+  "use strict";
+  const box = document.getElementById("lightbox");
+  const img = document.getElementById("lbImg");
+  const cap = document.getElementById("lbCap");
+  const items = [];
+  let idx = 0, opener = null;
+
+  Array.prototype.slice.call(document.querySelectorAll(".tile")).forEach(function(t){
+    const src = t.dataset.full;
+    const thumb = t.querySelector("img");
+    /* a window with no picture yet stays an empty frame and can't be opened */
+    if (!src){ t.classList.add("empty"); t.disabled = true; return; }
+    if (thumb) thumb.addEventListener("error", function(){
+      t.classList.add("empty"); t.disabled = true;
+      const at = items.indexOf(t); if (at > -1) items.splice(at, 1);
+    });
+    t.type = "button";
+    items.push(t);
+    t.addEventListener("click", function(){ open(items.indexOf(t)); });
+  });
+
+  function show(i){
+    idx = (i + items.length) % items.length;
+    const t = items[idx];
+    img.src = t.dataset.full;
+    img.alt = t.dataset.caption || "";
+    cap.textContent = t.dataset.caption || "";
+    const many = items.length > 1;
+    document.getElementById("lbPrev").hidden = !many;
+    document.getElementById("lbNext").hidden = !many;
+  }
+  function open(i){
+    opener = items[i];
+    show(i);
+    box.classList.add("on");
+    document.body.style.overflow = "hidden";
+    document.getElementById("lbClose").focus();
+  }
+  function close(){
+    box.classList.remove("on");
+    document.body.style.overflow = "";
+    if (opener) opener.focus();
+  }
+
+  document.getElementById("lbClose").addEventListener("click", close);
+  document.getElementById("lbPrev").addEventListener("click", function(){ show(idx - 1); });
+  document.getElementById("lbNext").addEventListener("click", function(){ show(idx + 1); });
+  box.addEventListener("click", function(e){ if (e.target === box) close(); });
+  document.addEventListener("keydown", function(e){
+    if (!box.classList.contains("on")) return;
+    if (e.key === "Escape") close();
+    if (e.key === "ArrowLeft") show(idx - 1);
+    if (e.key === "ArrowRight") show(idx + 1);
+  });
+})();
+</script>
+</body>
+</html>
