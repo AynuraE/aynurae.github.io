@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reading — Aynura Erejepbaeva</title>
+<meta name="description" content="What Aynura Erejepbaeva has read.">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" fill="%23FDF9E9"/><path d="M16 4 L28 16 L16 28 L4 16 Z" fill="none" stroke="%23E22304" stroke-width="3"/><path d="M11 16 L16 11 L21 16 L16 21 Z" fill="none" stroke="%23679C33" stroke-width="2.4"/></svg>'>
+<meta property="og:type" content="website">
+<meta property="og:title" content="Reading — Aynura Erejepbaeva">
+<meta property="og:description" content="What did I read?">
+<meta property="og:url" content="https://aynurae.github.io/books.html">
+<style>
+  :root{
+    --cloth:#FFFDF4;
+    --page:#FDF9E9;
+    --ink:#000;
+    --ink-soft:#4a4740;
+    --red:#E22304;
+    --green:#679C33;
+    --sans:Georgia,"Iowan Old Style","Times New Roman",serif;
+    --measure:62ch;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--page);color:var(--ink);
+    font-family:var(--sans);font-size:17px;line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit}
+
+  .masthead{
+    position:sticky;top:0;z-index:40;
+    display:flex;flex-wrap:wrap;gap:.6rem 1.4rem;align-items:baseline;
+    padding:1.1rem clamp(1rem,3vw,2.4rem);
+    background:color-mix(in srgb, var(--page) 88%, transparent);
+    backdrop-filter:blur(6px);
+  }
+  .wordmark{font-weight:400;font-size:1.05rem;letter-spacing:-.01em;text-decoration:none;margin-right:auto}
+  .back{font-size:.97rem;text-decoration:none;border-bottom:1.6px solid var(--red);padding-bottom:2px}
+
+  .wrap{max-width:980px;margin:0 auto;padding:clamp(2rem,6vh,4.5rem) clamp(1rem,3vw,2.4rem) 14vh}
+
+  h1{
+    font-size:clamp(2rem,4.4vw,3.3rem);font-weight:700;
+    letter-spacing:-.033em;line-height:1.05;margin:0 0 .5rem;
+  }
+  .count{margin:0 0 clamp(2rem,5vh,3.2rem);color:var(--ink-soft);font-size:.95rem}
+  .count b{color:var(--ink);font-variant-numeric:tabular-nums}
+
+  .panel{position:relative;padding:clamp(1.5rem,3vw,2.3rem);margin:0 0 clamp(2rem,5vh,3.4rem)}
+  .edge{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+  .edge path{
+    fill:none;stroke:var(--ink);stroke-width:1.7;stroke-linecap:round;
+    stroke-dasharray:var(--len);stroke-dashoffset:var(--len);
+    transition:stroke-dashoffset 1.6s ease-out;
+  }
+  .drawn > .edge path{stroke-dashoffset:0}
+  .panel > *:not(.edge){position:relative}
+
+  h2{font-size:clamp(1.2rem,2vw,1.5rem);font-weight:700;letter-spacing:-.02em;margin:0 0 .9rem}
+  h2 span{font-weight:400;font-size:.78em;color:var(--ink-soft);margin-left:.6rem}
+
+  .rows{list-style:none;margin:0;padding:0}
+  .rows li{
+    padding:.55rem 0;border-bottom:1px solid rgba(0,0,0,.13);
+    break-inside:avoid;
+  }
+  .rows li:last-child{border-bottom:0}
+  .rows .who{display:block;color:var(--ink-soft);font-size:.9rem;margin-top:.1rem}
+  .rows a{text-decoration:none;border-bottom:1.5px solid var(--red);padding-bottom:1px}
+  /* add class="fav" to an <li> for a red mark */
+  .rows li.fav .title::after{
+    content:"";display:inline-block;width:7px;height:7px;margin-left:.45rem;
+    background:var(--red);vertical-align:.12em;
+  }
+  /* add class="now" if you're still in the middle of it */
+  .rows li.now .title::after{
+    content:"reading now";margin-left:.6rem;
+    font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--red);vertical-align:.12em;
+  }
+  @media (min-width:820px){
+    #bookList{column-count:2;column-gap:3.2rem}
+  }
+  .legend{margin:0;color:var(--ink-soft);font-size:.85rem}
+  .legend i{
+    display:inline-block;width:7px;height:7px;background:var(--red);
+    margin-right:.35rem;vertical-align:.08em;
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .edge path{transition:none}
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <a class="wordmark" href="index.html">Aynura Erejepbaeva</a>
+  <a class="back" href="index.html#hobbies">Back to the site</a>
+</header>
+
+<div class="wrap">
+  <h1>What did I read?</h1>
+  <p class="count">In no particular order. <b id="count">0</b> so far.</p>
+
+  <!-- Add a book: copy one <li> block. class="fav" marks a favourite,
+       class="now" means you're still reading it. The tallies count themselves. -->
+
+  <section class="panel">
+    <h2>Books</h2>
+    <ul class="rows" id="bookList">
+      <li><span class="title">1984</span><span class="who">George Orwell</span></li>
+      <li><span class="title">Atomic Habits</span><span class="who">James Clear</span></li>
+      <li><span class="title">To Kill a Mockingbird</span><span class="who">Harper Lee</span></li>
+      <li><span class="title">The Stranger</span><span class="who">Albert Camus</span></li>
+      <li><span class="title">Alice's Adventures in Wonderland</span><span class="who">Lewis Carroll</span></li>
+      <li><span class="title">Frankenstein</span><span class="who">Mary Shelley</span></li>
+      <li><span class="title">The Little Prince</span><span class="who">Antoine de Saint-Exup&eacute;ry</span></li>
+      <li><span class="title">The Fault in Our Stars</span><span class="who">John Green</span></li>
+      <li><span class="title">The Alchemist</span><span class="who">Paulo Coelho</span></li>
+      <li><span class="title">Brave New World</span><span class="who">Aldous Huxley</span></li>
+      <li><span class="title">Man's Search for Meaning</span><span class="who">Viktor Frankl</span></li>
+      <li><span class="title">Fahrenheit 451</span><span class="who">Ray Bradbury</span></li>
+      <li><span class="title">The Memoirs of a Survivor</span><span class="who">Doris Lessing</span></li>
+      <li><span class="title">The Yellow Wallpaper</span><span class="who">Charlotte Perkins Gilman</span></li>
+      <li><span class="title">The Metamorphosis</span><span class="who">Franz Kafka</span></li>
+      <li><span class="title">Sapiens: A Brief History of Humankind</span><span class="who">Yuval Noah Harari</span></li>
+      <li><span class="title">The Diary of a Young Girl</span><span class="who">Anne Frank</span></li>
+      <li><span class="title">Born a Crime</span><span class="who">Trevor Noah</span></li>
+      <li><span class="title">Experience and Education</span><span class="who">John Dewey</span></li>
+      <li><span class="title">Crossing Customs</span><span class="who">Jay Davis &amp; Andrew Garrod</span></li>
+      <li><span class="title">Designing Your Life</span><span class="who">Bill Burnett &amp; Dave Evans</span></li>
+      <li><span class="title">Connecting in College</span><span class="who">Janice McCabe</span></li>
+      <li><span class="title">12 Rules for Life</span><span class="who">Jordan Peterson</span></li>
+      <li><span class="title">Three Karakalpak Poets</span><span class="who">Andrew Staniland</span></li>
+      <li><span class="title">Where Rivers and Mountains Sing</span><span class="who">Theodore Levin</span></li>
+      <li><span class="title">The Bell Jar</span><span class="who">Sylvia Plath</span></li>
+      <li><span class="title">Educated</span><span class="who">Tara Westover</span></li>
+      <li><span class="title">I Am Malala</span><span class="who">Malala Yousafzai</span></li>
+      <li><span class="title">Harmony</span><span class="who">Whitney Hanson</span></li>
+      <li><span class="title">Advice for the Soul</span><span class="who">Vincent van Gogh</span></li>
+      <li><span class="title">The Journals of Sylvia Plath</span><span class="who">Sylvia Plath</span></li>
+      <li><span class="title">In Defense of a Liberal Education</span><span class="who">Fareed Zakaria</span></li>
+      <li><span class="title">Notes from Underground</span><span class="who">Fyodor Dostoevsky</span></li>
+      <li><span class="title">So You're Having an Existential Crisis</span><span class="who">Ben Thomas</span></li>
+      <li><span class="title">Things in Nature Merely Grow</span><span class="who">Yiyun Li</span></li>
+      <li><span class="title">20 Letters to a Friend</span><span class="who">Svetlana Alliluyeva</span></li>
+      <li><span class="title">Girl Trouble</span><span class="who">Diana Whitney</span></li>
+      <li><span class="title">The Near and Distant World</span><span class="who">Bianca Stone</span></li>
+      <li><span class="title">Dear Friend, from My Life I Write to You in Your Life</span><span class="who">Yiyun Li</span></li>
+    </ul>
+  </section>
+
+  <section class="panel">
+    <h2>Online</h2>
+    <ul class="rows">
+      <li>
+        <span class="title"><a href="https://cs.stanford.edu/people/karpathy/advice.html">Doing well in your courses</a></span>
+        <span class="who">Andrej Karpathy</span>
+      </li>
+      <li>
+        <span class="title"><a href="https://blog.samaltman.com/the-days-are-long-but-the-decades-are-short">The days are long but the decades are short</a></span>
+        <span class="who">Sam Altman</span>
+      </li>
+      <li>
+        <!-- EDIT: put the real headline here; I couldn't confirm it. -->
+        <span class="title"><a href="https://www.nytimes.com/2025/07/18/opinion/ai-chatgpt-school.html">An opinion piece on AI in school</a></span>
+        <span class="who">The New York Times</span>
+      </li>
+    </ul>
+  </section>
+
+  <p class="legend"><i></i>a favourite</p>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  const NS = "http://www.w3.org/2000/svg";
+
+  /* the same seeded tremble the main page uses, so the boxes match */
+  function rng(seed){
+    return function(){
+      seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+      let t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+  }
+  const rand = rng(20280412);
+  const wob = a => (rand() - 0.5) * a;
+
+  function toPath(pts, amp){
+    let d = "M " + (pts[0][0] + wob(amp)).toFixed(1) + " " + (pts[0][1] + wob(amp)).toFixed(1);
+    for (let i = 1; i < pts.length; i++){
+      const a = pts[i - 1], b = pts[i];
+      const mx = (a[0] + b[0]) / 2 + wob(amp * 1.7);
+      const my = (a[1] + b[1]) / 2 + wob(amp * 1.7);
+      d += " Q " + mx.toFixed(1) + " " + my.toFixed(1) + " "
+         + (b[0] + wob(amp)).toFixed(1) + " " + (b[1] + wob(amp)).toFixed(1);
+    }
+    return d;
+  }
+
+  const panels = Array.prototype.slice.call(document.querySelectorAll(".panel"));
+
+  function drawEdges(){
+    panels.forEach(function(el){
+      const w = el.offsetWidth, h = el.offsetHeight;
+      if (!w || !h) return;
+      let svg = el.querySelector(":scope > .edge");
+      if (!svg){
+        svg = document.createElementNS(NS, "svg");
+        svg.setAttribute("class", "edge");
+        svg.appendChild(document.createElementNS(NS, "path"));
+        el.insertBefore(svg, el.firstChild);
+      }
+      svg.setAttribute("viewBox", "0 0 " + w + " " + h);
+      const pad = 3, path = svg.querySelector("path");
+      path.setAttribute("d", toPath([
+        [pad, pad], [w - pad, pad - 1], [w - pad + 1, h - pad], [pad + 1, h - pad], [pad, pad + 2]
+      ], 3.4));
+      path.style.setProperty("--len", path.getTotalLength());
+    });
+  }
+
+  /* each box tallies itself, and the line at the top adds them up */
+  let total = 0;
+  panels.forEach(function(p){
+    const n = p.querySelectorAll(".rows li").length;
+    total += n;
+    const h2 = p.querySelector("h2");
+    if (h2 && !h2.querySelector("span")){
+      const tag = document.createElement("span");
+      tag.textContent = n;
+      h2.appendChild(tag);
+    }
+  });
+  document.getElementById("count").textContent = total;
+
+  const seen = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if (e.isIntersecting) e.target.classList.add("drawn"); });
+  }, { threshold: 0.08 });
+
+  drawEdges();
+  panels.forEach(function(p){ seen.observe(p); });
+  window.addEventListener("resize", drawEdges);
+})();
+</script>
+</body>
+</html>
