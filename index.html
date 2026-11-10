@@ -375,12 +375,14 @@
     <section class="panel" id="about">
       <h2>About</h2>
       <figure class="portrait">
-        <img src="aynura.png" alt="Aynura Erejepbaeva">
+<img src="aynura.png" alt="Aynura Erejepbaeva" width="3024" height="4032">
         <figcaption>Aynura E</figcaption>
       </figure>
       <p>Sa’lem!</p>
       <p>My name is Aynura. My name translates to Moonlight (<i>Ay</i> – moon, <i>nura</i> – light) from Karakalpak.</p>
       <p>I'm a cognitive scientist and anthropologist exploring how minds work and cultures evolve across Asia, North America, Europe and Polynesia. I'm passionate about solving problems through systems thinking and human-centered design. I'm an FGLI student from Uzbekistan at Dartmouth College, and I believe in the power of educational access to create communities where everyone can thrive.</p>
+      <p>Raxmet!</p>
+      
     </section>
 
     <section class="panel" id="projects">
@@ -864,6 +866,12 @@
   render();
   window.addEventListener("scroll", onScroll, { passive: true });
   window.addEventListener("resize", function(){ drawEdges(); render(); });
+    /* images change a panel's height after the first measurement, so measure again */
+  window.addEventListener("load", function(){ drawEdges(); render(); });
+  if (window.ResizeObserver){
+    const ro = new ResizeObserver(function(){ drawEdges(); });
+    document.querySelectorAll(".panel, .card").forEach(function(el){ ro.observe(el); });
+  }
   if (reduce){
     wrap.style.display = "none";
     thread.style.display = "none";
